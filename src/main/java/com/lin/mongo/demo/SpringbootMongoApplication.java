@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
-
 //@EnableMongoRepositories(basePackages = {"com.lin.mongo.demo.user.dao"})
 public class SpringbootMongoApplication {
 
