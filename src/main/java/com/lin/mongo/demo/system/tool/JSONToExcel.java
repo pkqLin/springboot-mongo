@@ -17,12 +17,17 @@ public class JSONToExcel {
         HSSFWorkbook wb = new HSSFWorkbook();
         // 创建HSSFSheet对象
         HSSFSheet sheet = wb.createSheet("sheet0");
-        File dir = new File("D:\\resource.txt");
+        //需要转换的jsonTXT名称
+        String jsonTXT = "D:\\转换的txt文档\\fhd.txt";
+        //转换jsonExcel名称
+        String jsonExcel = "D:\\转换的txt文档\\fhd.xls";
+        File dir = new File(jsonTXT);
         FileReader reader = new FileReader(dir);
         BufferedReader br = new BufferedReader(reader);
         String str = null;
         int roleNo = 0;
         int rowNo = 0;
+
 
         String s1 = "";
         StringBuilder sb = new StringBuilder();
@@ -65,7 +70,6 @@ public class JSONToExcel {
             // }
             //a:没有取出,这里只要result 数组对象的json,
             JSONArray jsonArray = jsonObject.getJSONArray("result");*/
-
             JSONArray jsonArray =  JSONArray.parseArray(str);
             //获取标题
             for (int i = 0; i < jsonArray.size(); i++) {
@@ -94,12 +98,11 @@ public class JSONToExcel {
             }
 
         }
-
         br.close();
         reader.close();
 
         // 输出Excel文件
-        FileOutputStream output = new FileOutputStream("D:/target.xls");
+        FileOutputStream output = new FileOutputStream(jsonExcel);
         wb.write(output);
         wb.close();
         output.flush();
