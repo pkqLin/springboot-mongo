@@ -10,7 +10,10 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import java.io.*;
 import java.util.Set;
 
+//将json转换为Excel
+
 public class JSONToExcel {
+
     public static void main(String[] args) throws IOException {
         Set<String> keys = null;
         // 创建HSSFWorkbook对象
@@ -18,9 +21,9 @@ public class JSONToExcel {
         // 创建HSSFSheet对象
         HSSFSheet sheet = wb.createSheet("sheet0");
         //需要转换的jsonTXT名称
-        String jsonTXT = "D:\\转换的txt文档\\fhd.txt";
+        String jsonTXT = "D:\\转换的txt文档\\未记账订单（凭证号为空的）.txt";
         //转换jsonExcel名称
-        String jsonExcel = "D:\\转换的txt文档\\fhd.xls";
+        String jsonExcel = "D:\\转换的txt文档\\未记账订单（凭证号为空的）.xls";
         File dir = new File(jsonTXT);
         FileReader reader = new FileReader(dir);
         BufferedReader br = new BufferedReader(reader);
@@ -70,7 +73,7 @@ public class JSONToExcel {
             // }
             //a:没有取出,这里只要result 数组对象的json,
             JSONArray jsonArray = jsonObject.getJSONArray("result");*/
-            JSONArray jsonArray =  JSONArray.parseArray(str);
+            JSONArray jsonArray = JSONArray.parseArray(str);
             //获取标题
             for (int i = 0; i < jsonArray.size(); i++) {
                 if (keys == null) {
