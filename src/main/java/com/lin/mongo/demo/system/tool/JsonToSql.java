@@ -3,8 +3,13 @@ package com.lin.mongo.demo.system.tool;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonParser;
+import org.apache.poi.hssf.usermodel.HSSFCell;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class JsonToSql {
 
@@ -29,12 +34,51 @@ public class JsonToSql {
             }
             a = sb.toString();
             JSONArray jsonArray = JSONArray.parseArray(a);
+
+            Set<String> keys = null;
+
+            List<String> strsTemp = new ArrayList<>();
+
+            //获取标题
             for (int i = 0; i < jsonArray.size(); i++) {
-                JSONObject jsonElement = jsonArray.getJSONObject(i);
-                String name = jsonElement.get("sendorder_no").toString();
+                if (keys == null) {
+                    JSONObject item = jsonArray.getJSONObject(i);
+                    keys = item.keySet();
+                    for (Object s : keys) {
+                        strsTemp.add(s.toString());
+                    }
+                } else {
+                    break;
+                }
+            }
+            List<String> strs=strsTemp.stream().distinct().collect(Collectors.toList());
+            String sql = "insert into credit_card_city_info (";
+            for(String o:strs){
+                sql=sql+o+",";
+            }
+            sql=sql.substring(0,sql.length()-1);
+            sql+=") values ";
+            for (int i = 0; i < jsonArray.size(); i++) {
+               JSONObject jsonElement = jsonArray.getJSONObject(i);
+                /* String name = jsonElement.get("sendorder_no").toString();
                 String pinyin = jsonElement.get("VOUCHER_NO").toString();
                 String sqlStr = "insert into credit_card_city_info (id, city_name, initial,state,ishot,online_time,down_time,create_time,update_time,remark) values (null,"+name+","+pinyin+",null,null,null,null,null,null,null); \r\n";
-                System.out.println(sqlStr);
+                System.out.println(sqlStr);*/
+                sql+= "(";
+                for(String o:strs){
+                    sql+=jsonElement.get(o.toString())==null?"null"+",":"\""+jsonElement.get(o.toString())+"\""+",";
+                }
+                sql=sql.substring(0,sql.length()-1);
+                sql+=")";
+
+
+
+
+
+
+
+
+
                /* File file = new File("/Users/hanruikai/city.sql");
                 if (!file.exists()) {
                     file.createNewFile();
@@ -44,6 +88,8 @@ public class JsonToSql {
                 bufferedWriter.write(sqlStr);
                 bufferedWriter.close();*/
             }
+            System.out.println(sql);
         }
+
 
 }
