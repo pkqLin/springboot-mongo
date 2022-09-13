@@ -9,6 +9,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.Vector;
 import java.util.stream.Collectors;
 
 public class JsonToSql {
@@ -22,7 +23,7 @@ public class JsonToSql {
 
         private static void jsonToExcel(String a) throws Exception {
             JSONObject jsonParser = JSONObject.parseObject("");
-            String PATH = "D://转换的txt文档//11.txt";
+            String PATH = "D://转换的txt文档//dingshi.txt";
             File dir = new File(PATH);
             FileReader reader = new FileReader(dir);
             BufferedReader br = new BufferedReader(reader);
@@ -51,7 +52,7 @@ public class JsonToSql {
                     break;
                 }
             }
-            List<String> strs=strsTemp.stream().distinct().collect(Collectors.toList());
+            /*List<String> strs=strsTemp.stream().distinct().collect(Collectors.toList());
             String sql = "insert into credit_card_city_info (";
             for(String o:strs){
                 sql=sql+o+",";
@@ -60,10 +61,10 @@ public class JsonToSql {
             sql+=") values ";
             for (int i = 0; i < jsonArray.size(); i++) {
                JSONObject jsonElement = jsonArray.getJSONObject(i);
-                /* String name = jsonElement.get("sendorder_no").toString();
+                *//* String name = jsonElement.get("sendorder_no").toString();
                 String pinyin = jsonElement.get("VOUCHER_NO").toString();
                 String sqlStr = "insert into credit_card_city_info (id, city_name, initial,state,ishot,online_time,down_time,create_time,update_time,remark) values (null,"+name+","+pinyin+",null,null,null,null,null,null,null); \r\n";
-                System.out.println(sqlStr);*/
+                System.out.println(sqlStr);*//*
                 sql+= "(";
                 for(String o:strs){
                     sql+=jsonElement.get(o.toString())==null?"null"+",":"\""+jsonElement.get(o.toString())+"\""+",";
@@ -74,21 +75,24 @@ public class JsonToSql {
 
 
 
-
-
-
-
-
-               /* File file = new File("/Users/hanruikai/city.sql");
+               *//* File file = new File("/Users/hanruikai/city.sql");
                 if (!file.exists()) {
                     file.createNewFile();
                 }
                 FileWriter fileWriter = new FileWriter(file, true);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
                 bufferedWriter.write(sqlStr);
-                bufferedWriter.close();*/
+                bufferedWriter.close();*//*
+
+            }*/
+
+            String sql1 = "";
+            for (int i = 0; i < jsonArray.size(); i++) {
+                JSONObject jsonElement = jsonArray.getJSONObject(i);
+                String sqlStr = "update eshop_batch set system='"+ jsonElement.get("system").toString()+"',detail='"+jsonElement.get("detail").toString()+"', cron='"+jsonElement.get("cron").toString()+"',cron_explain='"+jsonElement.get("cronNew").toString()+"' where code ='"+jsonElement.get("code").toString()+"'; \r\n";
+                System.out.println(sqlStr);
             }
-            System.out.println(sql);
+            System.out.println(sql1);
         }
 
 

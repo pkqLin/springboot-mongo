@@ -10,8 +10,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import java.io.*;
 import java.util.Set;
 
-//将json转换为Excel
-
+//将
 public class JSONToExcel {
 
     public static void main(String[] args) throws IOException {
@@ -21,9 +20,9 @@ public class JSONToExcel {
         // 创建HSSFSheet对象
         HSSFSheet sheet = wb.createSheet("sheet0");
         //需要转换的jsonTXT名称
-        String jsonTXT = "D:\\转换的txt文档\\未记账订单（凭证号为空的）.txt";
+        String jsonTXT = "D:\\转换的txt文档\\20220913.txt";
         //转换jsonExcel名称
-        String jsonExcel = "D:\\转换的txt文档\\未记账订单（凭证号为空的）.xls";
+        String jsonExcel = "D:\\转换的txt文档\\20220913.xls";
         File dir = new File(jsonTXT);
         FileReader reader = new FileReader(dir);
         BufferedReader br = new BufferedReader(reader);

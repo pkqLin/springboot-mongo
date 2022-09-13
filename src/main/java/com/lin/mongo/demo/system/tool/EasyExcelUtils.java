@@ -18,7 +18,7 @@ public class EasyExcelUtils {
 
     public static void main(String[] args) {
         try {
-            FileInputStream inp = new FileInputStream("D://转换的txt文档//11.xls");
+            FileInputStream inp = new FileInputStream("D://转换的txt文档//dingshi.xls");
             Workbook workbook = WorkbookFactory.create(inp);
             //获取sheet数
             int sheetNum = workbook.getNumberOfSheets();
