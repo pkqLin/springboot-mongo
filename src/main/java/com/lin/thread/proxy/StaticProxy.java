@@ -23,11 +23,10 @@ class You implements Marry{
 
 class WeddingCompany implements Marry{
     //真实目标代理过来的
-    private  Marry marry;
+    private Marry marry;
     public WeddingCompany(Marry marry){
         this.marry=marry;
     }
-
     @Override
     public void HappyMarry() {
         System.out.println("代理之前");
